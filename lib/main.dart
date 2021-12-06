@@ -3,5 +3,5 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tthc/app.dart';
 
 void main() {
-  runApp(ProviderScope(child: const RootApp()));
+  runApp(const ProviderScope(child: RootApp()));
 }
