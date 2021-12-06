@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tthc/src/features/action/screens/action_screen.dart';
 import 'package:tthc/src/features/form/screens/form_screen.dart';
 import 'package:tthc/src/features/location/screens/location_screen.dart';
-import 'package:tthc/src/features/map/screens/form_screen.dart';
+import 'package:tthc/src/features/map/screens/map_screen.dart';
 import 'package:tthc/src/utils/styles.dart';
 
 class RootApp extends ConsumerWidget {

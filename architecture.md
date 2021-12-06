@@ -1,6 +1,5 @@
 # Cấu trúc dự án
 
-Cấu trúc thư mục
 ```js
 lib                                      
 ├─ src                                   
@@ -26,17 +25,15 @@ lib
 │  │  ├─ location (Tính năng chọn vị trí)                        
 │  │  │  ├─ controllers                  
 │  │  │  │  └─ `location_controller.dart`  
-│  │  │  ├─ repositories                 
-│  │  │  │  └─ `form_remote.dart`          
+│  │  │  ├─ repositories                      
 │  │  │  ├─ screens                      
 │  │  │  │  └─ `location_screen.dart`      
 │  │  │  └─ widgets                      
 │  │  └─ map (Tính năng xem bản đồ)                             
 │  │     ├─ controllers                  
 │  │     ├─ repositories                 
-│  │     │  └─ `form_remote.dart`          
 │  │     ├─ screens                      
-│  │     │  └─ `form_screen.dart`          
+│  │     │  └─ `map_screen.dart`          
 │  │     └─ widgets                      
 │  ├─ models                             
 │  │  ├─ `tthc_action.dart`                
