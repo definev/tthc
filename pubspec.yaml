@@ -27,7 +27,8 @@ dependencies:
 
   # Styles
   flex_color_scheme: ^4.1.1
-  staggered_grid_view_flutter: ^0.0.4
+  animations: ^2.0.2
+  simple_animations: ^4.0.1
 
 dev_dependencies:
   bloc_test: ^9.0.1

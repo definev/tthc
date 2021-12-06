@@ -14,7 +14,13 @@ class RootApp extends ConsumerWidget {
     final appTheme = ref.watch(appStyleThemeProvider);
 
     return MaterialApp(
-      theme: appTheme.toTheme,
+      theme: appTheme.toTheme.copyWith(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          },
+        ),
+      ),
       initialRoute: MapScreen.routeName,
       routes: {
         ActionScreen.routeName: (_) => const ActionScreen(),

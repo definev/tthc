@@ -1,39 +1,39 @@
 import 'package:flutter/widgets.dart';
 
-class BuildingBase {
-  const BuildingBase(this.height, this.width);
-
-  final int height;
-  final int width;
+abstract class BuildingBase {
+  const BuildingBase();
 }
 
 class BuildingData extends BuildingBase {
   const BuildingData({
-    required int height,
-    required int width,
     required this.name,
     required this.detailMapImage,
     required this.roomPins,
-  }) : super(height, width);
+  });
 
   final String name;
-  final String detailMapImage;
-  final List<Offset> roomPins;
+  final String? detailMapImage;
+  final List<RoomPinData>? roomPins;
 }
 
-class BuildingSpacingData extends BuildingBase {
-  const BuildingSpacingData({required int height, required int width})
-      : super(height, width);
+class RoomPinData {
+  const RoomPinData({
+    required this.name,
+    required this.offset,
+  });
+
+  final String name;
+  final Offset offset;
 }
 
-enum ArrowDirection { left, right, up, down }
+class BuildingSpacingData extends BuildingBase {}
+
+enum BuildingArrowDirection { left, right, up, down }
 
 class BuildingArrowData extends BuildingBase {
   const BuildingArrowData({
     required this.direction,
-    required int height,
-    required int width,
-  }) : super(height, width);
+  });
 
-  final ArrowDirection direction;
+  final BuildingArrowDirection direction;
 }
