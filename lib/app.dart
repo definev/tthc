@@ -15,6 +15,7 @@ class RootApp extends ConsumerWidget {
 
     return MaterialApp(
       theme: appTheme.toTheme,
+      initialRoute: MapScreen.routeName,
       routes: {
         ActionScreen.routeName: (_) => const ActionScreen(),
         FormScreen.routeName: (_) => const FormScreen(),
