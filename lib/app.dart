@@ -5,6 +5,7 @@ import 'package:tthc/src/features/action/screens/action_screen.dart';
 import 'package:tthc/src/features/form/screens/form_screen.dart';
 import 'package:tthc/src/features/location/screens/location_screen.dart';
 import 'package:tthc/src/features/map/screens/map_screen.dart';
+import 'package:tthc/src/features/splash_screen.dart';
 import 'package:tthc/src/utils/styles.dart';
 
 class RootApp extends ConsumerWidget {
@@ -24,12 +25,13 @@ class RootApp extends ConsumerWidget {
           },
         ),
       ),
-      initialRoute: MapScreen.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: {
         ActionScreen.routeName: (_) => const ActionScreen(),
         FormScreen.routeName: (_) => const FormScreen(),
         LocationScreen.routeName: (_) => const LocationScreen(),
         MapScreen.routeName: (_) => const MapScreen(),
+        SplashScreen.routeName: (_) => const SplashScreen(),
       },
     );
   }
