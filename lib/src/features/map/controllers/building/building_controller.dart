@@ -39,13 +39,16 @@ class BuildingController extends ChangeNotifier {
             // reverse: true,
             itemCount: building.rooms!.length,
             physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) => Container(
-              key: markerKeys[index],
-              color: Theme.of(context).colorScheme.surface,
-              child: Center(
-                child: Room(
-                  tooltipController: toolTipControllerList[index],
-                  data: building.rooms![index],
+            itemBuilder: (BuildContext context, int index) => SizedBox(
+              key: ValueKey(building.rooms![index].name),
+              child: Container(
+                key: markerKeys[index],
+                color: Theme.of(context).colorScheme.surface,
+                child: Center(
+                  child: Room(
+                    tooltipController: toolTipControllerList[index],
+                    data: building.rooms![index],
+                  ),
                 ),
               ),
             ),

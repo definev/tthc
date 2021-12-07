@@ -49,7 +49,7 @@ import 'package:tthc/src/utils/durations.dart';
 /// |         |         |      Cổng phụ     |         |         |
 /// |         |         |                   |         |         |
 /// --------------------‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾--------------------
-final oneBuildingController = BuildingListController(
+final oneBuildingListController = BuildingListController(
   buildings: [
     const BuildingData(
       name: 'Lối ra',
@@ -86,7 +86,7 @@ final oneBuildingController = BuildingListController(
 
 final buildingListControllerProvider =
     ChangeNotifierProvider<BuildingListController>(
-  (_) => oneBuildingController,
+  (_) => oneBuildingListController,
 );
 
 class BuildingListController extends ChangeNotifier {

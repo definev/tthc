@@ -11,14 +11,20 @@ import 'package:tthc/src/features/map/utils/context_ext.dart';
 import 'package:tthc/src/features/map/utils/navigation_key.dart';
 import 'package:tthc/src/utils/durations.dart';
 
+final actionDataProvider =
+    StateProvider<ActionData>((ref) => oneBuildingUsecaseActionData);
+
 final blinkAssistantControllerProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => BlinkAssistantController(ref.read),
+  (ref) {
+    final actionData = ref.watch(actionDataProvider);
+    return BlinkAssistantController(ref.read, actionData);
+  },
 );
 
 class BlinkAssistantController extends ChangeNotifier {
-  BlinkAssistantController(this._read);
+  BlinkAssistantController(this._read, this._actionData);
 
-  final ActionData _actionData = oneBuildingUsecaseActionData;
+  final ActionData _actionData;
 
   StepInfo? get currentStepInfo =>
       actualStep < 0 && !isFinish ? null : _actionData.stepInfos[actualStep];
@@ -121,7 +127,7 @@ class BlinkAssistantController extends ChangeNotifier {
       if (_actionData.stepTravelled
               .firstWhere((element) => element is RoomAction) ==
           action) {
-        duration = (Durations.kFast + 50).duration;
+        duration = (Durations.kFast + 80).duration;
       }
 
       return Future.delayed(
@@ -149,10 +155,15 @@ class BlinkAssistantController extends ChangeNotifier {
     if (currentStep >= _actionData.stepTravelled.length) {
       return;
     }
-
-    final position = await calculateStep(currentStep + 1);
-    if (position != null) {
-      positions.add(position);
+    if (currentStep == positions.length - 1) {
+      final position = await calculateStep(currentStep + 1);
+      if (position != null) {
+        positions.add(position);
+        currentStep++;
+        notifyListeners();
+      }
+    } else {
+      await calculateStep(currentStep + 1);
       currentStep++;
       notifyListeners();
     }

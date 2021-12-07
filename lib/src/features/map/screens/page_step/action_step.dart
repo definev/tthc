@@ -39,6 +39,7 @@ class ActionStep extends ConsumerWidget {
               children: [
                 Text(
                   info.title,
+                  key: ValueKey('title_$step'),
                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -63,6 +64,7 @@ class ActionStep extends ConsumerWidget {
               padding: const EdgeInsets.only(top: 12),
               child: Text(
                 info.description,
+                  key: ValueKey('description_$step'),
                 textAlign: TextAlign.justify,
               ),
             ),
