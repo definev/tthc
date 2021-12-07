@@ -1,18 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tthc/src/features/map/controllers/blink_assistant_controller.dart';
 import 'package:tthc/src/features/map/models/building_data.dart';
 import 'package:tthc/src/features/map/screens/building_list_screen.dart';
 import 'package:tthc/src/features/map/screens/building_screen.dart';
+import 'package:tthc/src/features/map/screens/page_step/step_builder.dart';
+import 'package:tthc/src/features/map/utils/navigation_key.dart';
 import 'package:tthc/src/features/map/widgets/blink_assistant.dart';
+import 'package:tthc/src/utils/durations.dart';
 
-class MapScreen extends HookWidget {
+class MapScreen extends HookConsumerWidget {
   const MapScreen({Key? key}) : super(key: key);
 
   static const routeName = '/map';
 
   @override
-  Widget build(BuildContext context) {
-    final navigatorKey = useMemoized(() => GlobalKey<NavigatorState>());
+  Widget build(BuildContext context, WidgetRef ref) {
+    final assistantController = ref.watch(blinkAssistantControllerProvider);
+    final navigatorKey = ref.watch(navigatorKeyProvider);
+    final mq = MediaQuery.of(context);
+
+    useEffect(
+      () {
+        WidgetsBinding.instance!.addPostFrameCallback(
+          (_) {
+            assistantController.addInitPosition(
+              Offset(
+                (mq.size.width - 80) / 2,
+                mq.size.height - mq.padding.bottom - mq.padding.top - 90,
+              ),
+            );
+          },
+        );
+      },
+      [],
+    );
 
     return WillPopScope(
       onWillPop: () async {
@@ -24,23 +47,6 @@ class MapScreen extends HookWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            color: Theme.of(context).colorScheme.onBackground,
-            onPressed: () {
-              if (navigatorKey.currentState?.canPop() == true) {
-                navigatorKey.currentState!.pop();
-              } else {
-                Navigator.of(context).pop();
-              }
-            },
-          ),
-
-          // shadowColor: Colors.transparent,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          elevation: 0,
-        ),
         body: Stack(
           children: [
             Column(
@@ -50,19 +56,23 @@ class MapScreen extends HookWidget {
                     key: navigatorKey,
                     initialRoute: BuildingListScreen.routeName,
                     onGenerateRoute: (settings) {
-                      if (settings.name == BuildingScreen.routeName) {
-                        final data = settings.arguments as BuildingData?;
-                        return MaterialPageRoute<dynamic>(
-                          builder: (context) => BuildingScreen(
-                            data: data!,
-                          ),
-                        );
-                      }
                       if (settings.name == BuildingListScreen.routeName) {
                         return MaterialPageRoute<dynamic>(
                           builder: (context) => const BuildingListScreen(),
                         );
                       }
+                      if (settings.name == BuildingScreen.routeName) {
+                        final data = settings.arguments as BuildingData?;
+
+                        return MaterialPageRoute<dynamic>(
+                          settings: RouteSettings(
+                            name: 'b:${data?.name}',
+                            arguments: data,
+                          ),
+                          builder: (context) => BuildingScreen(data: data!),
+                        );
+                      }
+
                       return null;
                     },
                   ),
@@ -70,43 +80,26 @@ class MapScreen extends HookWidget {
                 const SizedBox(height: 200),
               ],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .secondary
-                          .withOpacity(0.1),
-                      blurRadius: 20,
-                    ),
-                  ],
-                ),
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Chào tôi là Team17',
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                    const SizedBox(height: 80),
-                    const Text('Tôi sẽ hướng dẫn bạn làm thủ tục nhanh chóng'),
-                  ],
+            if (assistantController.currentStep == 0)
+              ColoredBox(
+                color: Colors.transparent,
+                child: SizedBox(
+                  height: mq.size.height,
+                  width: mq.size.width,
                 ),
               ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: StepBuilder(navigatorKey: navigatorKey),
             ),
-            const Positioned(
-              bottom: 60,
-              left: 0,
-              right: 0,
-              child: BlinkAssistant(),
-            ),
+            if (assistantController.isInit)
+              AnimatedPositioned(
+                duration: Durations.kMedium.duration,
+                curve: Curves.easeInOut,
+                left: assistantController.currentAssistantPos.dx,
+                top: assistantController.currentAssistantPos.dy,
+                child: const BlinkAssistant(),
+              ),
           ],
         ),
       ),

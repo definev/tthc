@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class WelcomeStep extends StatelessWidget {
-  const WelcomeStep({Key? key}) : super(key: key);
+class GoodbyeStep extends StatelessWidget {
+  const GoodbyeStep({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +11,10 @@ class WelcomeStep extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Chào tôi là Team17',
+            'Chào tạm biệt!',
             style: Theme.of(context).textTheme.headline6,
           ),
-          const Text('Tôi sẽ hướng dẫn bạn làm thủ tục nhanh chóng'),
+          const Text('Hy vọng bạn hài lòng với trải nghiệm của chúng tôi.'),
         ],
       ),
     );

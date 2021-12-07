@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
 abstract class BuildingBase {
   const BuildingBase();
@@ -7,23 +7,43 @@ abstract class BuildingBase {
 class BuildingData extends BuildingBase {
   const BuildingData({
     required this.name,
-    required this.detailMapImage,
-    required this.roomPins,
+    required this.rooms,
   });
 
   final String name;
-  final String? detailMapImage;
-  final List<RoomPinData>? roomPins;
+  final List<RoomData>? rooms;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is BuildingData && other.name == name;
+  }
+
+  @override
+  int get hashCode => name.hashCode ^ rooms.hashCode;
 }
 
-class RoomPinData {
-  const RoomPinData({
+class RoomData {
+  const RoomData({
     required this.name,
-    required this.offset,
+    required this.height,
+    required this.width,
   });
 
   final String name;
-  final Offset offset;
+  final int height;
+  final int width;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is BuildingData && other.name == name;
+  }
+
+  @override
+  int get hashCode => name.hashCode ^ height.hashCode ^ width.hashCode;
 }
 
 class BuildingSpacingData extends BuildingBase {}
