@@ -66,9 +66,9 @@ final oneBuildingListController = BuildingListController(
         RoomData(name: 'Văn hóa - Xã hội', height: 1, width: 1),
         RoomData(name: 'Quản lý đô thị - xây dựng', height: 1, width: 1),
         // Tầng 2
-        RoomData(name: 'Tư pháp - Hộ tịch', height: 1, width: 1),
-        RoomData(name: 'Địa chính - Xây dựng', height: 1, width: 1),
         RoomData(name: 'Tài chính - Kế toán', height: 1, width: 1),
+        RoomData(name: 'Kỹ thuật', height: 1, width: 2),
+        // RoomData(name: 'Địa chính - Xây dựng', height: 1, width: 1),
         // Tầng 1
         RoomData(name: 'Tiếp dân', height: 1, width: 2),
         RoomData(name: 'Tài nguyên - môi trường', height: 1, width: 1),

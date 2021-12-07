@@ -12,7 +12,7 @@ import 'package:tthc/src/features/map/utils/navigation_key.dart';
 import 'package:tthc/src/utils/durations.dart';
 
 final actionDataProvider =
-    StateProvider<ActionData>((ref) => oneBuildingUsecaseActionData);
+    StateProvider<ActionData>((ref) => identifyActionDataUsecase);
 
 final blinkAssistantControllerProvider = ChangeNotifierProvider.autoDispose(
   (ref) {

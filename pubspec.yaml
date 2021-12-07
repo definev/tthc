@@ -13,6 +13,8 @@ dependencies:
       url: "https://github.com/definev/dvhcvn.git"
       path: transformers/dart-dvhcvn
       ref: master
+  # Network
+  dio: ^4.0.4
 
   # Styles
   flex_color_scheme: ^4.1.1
@@ -31,6 +33,7 @@ dependencies:
   intl: ^0.17.0
   just_the_tooltip: ^0.0.10
   simple_animations: ^4.0.1
+  uuid: ^3.0.5
 
 dev_dependencies:
   flutter_test:
@@ -43,3 +46,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+
+  assets:
+    - assets/splash.jpg
