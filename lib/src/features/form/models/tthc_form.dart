@@ -1,48 +1,51 @@
-import 'dart:convert';
-
-/// Em để tạm như này mấy thông tin trong kế hoạch lúc đầu thôi
-///
-/// còn anh tùy chỉnh gì thì cứ chỉnh sửa nhé anh Chúc Anh
-///
-/// Em sử dụng cái data class generator trong vscode để gen đống parse json này
-/// anh tham khảo nhé
 class TTHCForm {
-  const TTHCForm({
-    required this.id,
-    required this.name,
-    required this.identity,
-    required this.tthcActionId,
-    required this.tthcLocationId,
+  TTHCForm({
+    required this.fullName,
+    required this.userAddress,
+    required this.identityCard,
+    required this.tenThuTuc,
+    required this.maSo,
+    required this.state,
   });
+  factory TTHCForm.fromJson(Map<String, dynamic> json) => TTHCForm(
+        fullName: json['fullName'] as String,
+        userAddress: json['userAddress'] as String,
+        identityCard: json['identityCard'] as String,
+        tenThuTuc: json['tenThuTuc'] as String,
+        maSo: json['maSo'] as String,
+        state: json['state'] as String,
+      );
 
-  factory TTHCForm.fromMap(Map<String, dynamic> map) {
-    return TTHCForm(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      identity: map['identity'] as String,
-      tthcActionId: map['tthcActionId'] as String,
-      tthcLocationId: map['tthcLocationId'] as String,
-    );
-  }
+  final String fullName;
+  final String userAddress;
+  final String identityCard;
+  final String tenThuTuc;
+  final String maSo;
+  final String state;
 
-  factory TTHCForm.fromJson(String source) =>
-      TTHCForm.fromMap(json.decode(source) as Map<String, dynamic>);
+  TTHCForm copyWith({
+    String? fullName,
+    String? userAddress,
+    String? identityCard,
+    String? tenThuTuc,
+    String? maSo,
+    String? state,
+  }) =>
+      TTHCForm(
+        fullName: fullName ?? this.fullName,
+        userAddress: userAddress ?? this.userAddress,
+        identityCard: identityCard ?? this.identityCard,
+        tenThuTuc: tenThuTuc ?? this.tenThuTuc,
+        maSo: maSo ?? this.maSo,
+        state: state ?? this.state,
+      );
 
-  final String id;
-  final String name;
-  final String identity;
-  final String tthcActionId;
-  final String tthcLocationId;
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'identity': identity,
-      'tthcActionId': tthcActionId,
-      'tthcLocationId': tthcLocationId,
-    };
-  }
-
-  String toJson() => json.encode(toMap());
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'fullName': fullName,
+        'userAddress': userAddress,
+        'identityCard': identityCard,
+        'tenThuTuc': tenThuTuc,
+        'maSo': maSo,
+        'state': state,
+      };
 }
