@@ -2,15 +2,19 @@
 
 Phần mềm tthc lấy ý tưởng từ việc các bối rối khi mọi người đi làm thủ tục, không biết đi ra phòng nào xin những gì. tthc là một bản đồ thu nhỏ sẽ hướng dẫn bạn từng bước để làm thủ tục một cách chi tiết nhanh chóng và dễ hiểu, tthc hướng dẫn cụ thể bước làm thủ tục nào sẽ ra phòng nào, vị trí của phòng đó và các chú thích cần ghi nhớ để làm thủ tục giúp người dùng thực hiện thủ tục nhanh chóng và thoải mái.
 
-# Screenshots
+## Integration test
+Chạy kiểm thử animation màn hình `MapScreen` 
+```bash
+flutter drive --driver=test_driver/integration_test_driver.dart --target=integration_test/map_test.dart
+```
 
+## Screenshots
 
 <table>
   <tr>
     <td>Splash screen</td>
      <td>Chọn lịch hen thủ tục</td>
      <td>Thêm lịch hẹn</td>
-    
   </tr>
   <tr>
     <td><img src="https://user-images.githubusercontent.com/62325868/145140079-aa6c43aa-3252-427a-98cb-6bcd23f1c691.png"></td>
@@ -27,11 +31,26 @@ Phần mềm tthc lấy ý tưởng từ việc các bối rối khi mọi ngư�
     <td><img src="https://user-images.githubusercontent.com/62325868/145140462-8f2aeb48-a7d5-49e0-8ce9-bda7cc74c84b.png"></td>
     <td><img src="https://user-images.githubusercontent.com/62325868/145141028-b39985f2-d57a-4f78-832b-c0be65e1183d.gif"></td>
   </tr>
-
-
  </table>
 
+## Các packages sử dụng
+### Network
+- dio
+### State management
+- flutter_riverpod
+### Widget life-cycle
+- flutter_hooks
+- hooks_riverpod
+### Styling
+- animations
+- simple_animations
+- flex_color_scheme
+- just_the_tooltip
+### Testing
+- flutter_test
+- integration_test
+### Linting
+- very_good_analysis
 
-
-
-[Cấu trúc dự án](./architecture.md)
+## Cấu trúc dự án
+Xem tại file [cấu trúc dự án](./architecture.md)
