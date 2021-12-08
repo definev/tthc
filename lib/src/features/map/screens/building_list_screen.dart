@@ -12,9 +12,12 @@ class BuildingListScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final listController = ref.watch(buildingListControllerProvider);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: listController.buildingWidgets,
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) => Stack(
+          children: listController.buildingWidgets(context, constraints),
+        ),
+      ),
     );
   }
 }

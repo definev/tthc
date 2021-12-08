@@ -32,15 +32,17 @@ class RoomAction extends BaseAction {
 
 final identifyActionDataUsecase = ActionData(
   stepTravelled: [
-    BuildingAction('Tòa nhà chính'),
-    RoomAction('Tòa nhà chính', 'Tiếp dân'),
-    RoomAction('Tòa nhà chính', 'Kỹ thuật'),
-    RoomAction('Tòa nhà chính', 'Tài chính - Kế toán'),
+    BuildingAction('Tòa nhà A'),
+    RoomAction('Tòa nhà A', 'Tiếp dân'),
+    BuildingAction('Tòa nhà B'),
+    RoomAction('Tòa nhà B', 'Kỹ thuật'),
+    BuildingAction('Tòa nhà A'),
+    RoomAction('Tòa nhà A', 'Tài chính - Kế toán'),
     BuildingAction('Lối ra'),
   ],
   stepInfos: [
     StepInfo(
-      'Vào tòa nhà chính',
+      'Vào tòa nhà A',
       'Bạn đi vào tòa nhà chính xuất trình giấy tờ, để được hướng dẫn. '
           'Bạn phải có giấy xét nghiệm âm tính có hiệu lực trong vòng 24h '
           'và đeo khẩu trang, kiểm tra nhiệt độ để đảm bảo an toàn.',
@@ -51,10 +53,18 @@ final identifyActionDataUsecase = ActionData(
           'làm hồ sơ thủ tục.',
     ),
     StepInfo(
+      'Vào tòa nhà B',
+      'Đi sang tòa nhà B ở bên tay phải nhà A để tiếp tục làm thủ tục.',
+    ),
+    StepInfo(
       'Vào phòng kỹ thuật',
       'Tiếp tục vào phòng kĩ thuật ở tầng hai để chụp '
           'ảnh chân dung của căn cước. '
           'Lấy dấu vân tay và điền thông tin của người thân vào hồ sơ. ',
+    ),
+    StepInfo(
+      'Vào tòa nhà A',
+      'Quay trở lại nhà A hoàn thành lệ phí thủ tục.',
     ),
     StepInfo(
       'Vào phòng tài chính - kế toán',
