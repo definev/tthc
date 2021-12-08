@@ -68,7 +68,7 @@ class Building extends HookConsumerWidget {
             opacity: value.get(_BuildingAnimationType.fade),
             child: Container(
               height: 90,
-              width: MediaQuery.of(context).size.width * 0.5,
+              width: 150,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(

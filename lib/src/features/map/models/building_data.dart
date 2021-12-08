@@ -1,15 +1,19 @@
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
+import 'package:flutter/rendering.dart';
+
 abstract class BuildingBase {
   const BuildingBase();
 }
 
 class BuildingData extends BuildingBase {
   const BuildingData({
+    required this.relativePosition,
     required this.name,
     required this.rooms,
   });
 
+  final Offset relativePosition;
   final String name;
   final List<RoomData>? rooms;
 
