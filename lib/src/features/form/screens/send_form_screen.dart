@@ -50,7 +50,8 @@ class SendFormScreen extends ConsumerWidget {
                   ),
                   keyboardType: TextInputType.number,
                   onChanged: (value) => controller.updateForm(
-                      controller.form.copyWith(identityCard: value)),
+                    controller.form.copyWith(identityCard: value),
+                  ),
                 ),
                 const SizedBox(height: 12),
                 SizedBox(
