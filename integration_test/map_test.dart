@@ -79,8 +79,8 @@ void main() {
         final tiepDanRoom = find.byKey(const ValueKey('Tiếp dân')).first;
         final assistantOffset = tester.getCenter(assistant);
         final tiepDanRoomOffset = tester.getCenter(tiepDanRoom);
-        expect((assistantOffset.dx - tiepDanRoomOffset.dx).abs(), lessThan(1));
-        expect((assistantOffset.dy - tiepDanRoomOffset.dy).abs(), lessThan(1));
+        expect((assistantOffset.dx - tiepDanRoomOffset.dx).abs(), lessThan(2));
+        expect((assistantOffset.dy - tiepDanRoomOffset.dy).abs(), lessThan(2));
       },
     );
   });
