@@ -25,7 +25,7 @@ Phần mềm tthc lấy ý tưởng từ việc các bối rối khi mọi ngư�
   <tr>
     <td><img src="https://user-images.githubusercontent.com/62325868/145140422-668f030a-50c3-4bcf-956d-9d08976a88eb.png"></td>
     <td><img src="https://user-images.githubusercontent.com/62325868/145140462-8f2aeb48-a7d5-49e0-8ce9-bda7cc74c84b.png"></td>
-    <td><img src="https://user-images.githubusercontent.com/62325868/145140678-cfe16799-180b-48eb-a1f9-177520ea0771.gif"></td>
+    <td><img src="https://user-images.githubusercontent.com/62325868/145141028-b39985f2-d57a-4f78-832b-c0be65e1183d.gif"></td>
   </tr>
 
 
