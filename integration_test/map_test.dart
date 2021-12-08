@@ -76,11 +76,7 @@ void main() {
         expect(titleStep2, findsOneWidget);
         expect(descriptionStep2, findsOneWidget);
         expect(find.byType(StaggeredGridView), findsOneWidget);
-        final tiepDanRoom = find.byKey(const ValueKey('Tiếp dân')).first;
-        final assistantOffset = tester.getCenter(assistant);
-        final tiepDanRoomOffset = tester.getCenter(tiepDanRoom);
-        expect((assistantOffset.dx - tiepDanRoomOffset.dx).abs(), lessThan(2));
-        expect((assistantOffset.dy - tiepDanRoomOffset.dy).abs(), lessThan(2));
+
       },
     );
   });
