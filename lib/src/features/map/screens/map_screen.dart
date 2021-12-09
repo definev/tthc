@@ -38,14 +38,7 @@ class MapScreen extends HookConsumerWidget {
     );
 
     return WillPopScope(
-      onWillPop: () async {
-        if (navigatorKey.currentState?.canPop() == true) {
-          navigatorKey.currentState!.pop();
-          return false;
-        } else {
-          return true;
-        }
-      },
+      onWillPop: () async => assistantController.back(),
       child: Scaffold(
         body: Stack(
           children: [
@@ -80,14 +73,35 @@ class MapScreen extends HookConsumerWidget {
                 const SizedBox(height: 200),
               ],
             ),
-            if (assistantController.currentStep == 0)
-              ColoredBox(
-                color: Colors.transparent,
-                child: SizedBox(
-                  height: mq.size.height,
-                  width: mq.size.width,
+            Align(
+              alignment: Alignment.topLeft,
+              child: SafeArea(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: AnimatedOpacity(
+                    duration: Durations.kMedium.duration,
+                    opacity: assistantController.currentStep == 0 ? 1 : 0,
+                    curve: Curves.decelerate,
+                    child: IgnorePointer(
+                      ignoring: assistantController.currentStep != 0,
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          shape: const CircleBorder(),
+                          fixedSize: const Size(56, 56),
+                        ),
+                        onPressed: () async {
+                          if (await assistantController.back()) {
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: const Center(child: Icon(Icons.arrow_back)),
+                      ),
+                    ),
+                  ),
                 ),
               ),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: StepBuilder(navigatorKey: navigatorKey),

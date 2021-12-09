@@ -43,7 +43,7 @@ final identifyActionDataUsecase = ActionData(
   stepInfos: [
     StepInfo(
       'Vào tòa nhà A',
-      'Bạn đi vào tòa nhà chính xuất trình giấy tờ, để được hướng dẫn. '
+      'Bạn đi vào tòa nhà A xuất trình giấy tờ, để được hướng dẫn. '
           'Bạn phải có giấy xét nghiệm âm tính có hiệu lực trong vòng 24h '
           'và đeo khẩu trang, kiểm tra nhiệt độ để đảm bảo an toàn.',
     ),
@@ -81,19 +81,22 @@ final identifyActionDataUsecase = ActionData(
 
 final changeVerifyActionDataUsecase = ActionData(
   stepTravelled: [
-    BuildingAction('Tòa nhà chính'),
-    RoomAction('Tòa nhà chính', 'Tiếp dân'),
-    RoomAction('Tòa nhà chính', 'Văn phòng - Thống kê'),
-    RoomAction('Tòa nhà chính', 'Quản lý đô thị - xây dựng'),
-    RoomAction('Tòa nhà chính', 'Tài nguyên - môi trường'),
-    RoomAction('Tòa nhà chính', 'Quản lý đô thị - xây dựng'),
-    RoomAction('Tòa nhà chính', 'Tài chính - Kế toán'),
+    BuildingAction('Tòa nhà A'),
+    RoomAction('Tòa nhà A', 'Tiếp dân'),
+    BuildingAction('Tòa nhà B'),
+    RoomAction('Tòa nhà B', 'Văn phòng - Thống kê'),
+    BuildingAction('Tòa nhà A'),
+    RoomAction('Tòa nhà A', 'Quản lý đô thị - xây dựng'),
+    RoomAction('Tòa nhà A', 'Tài nguyên - môi trường'),
+    RoomAction('Tòa nhà A', 'Quản lý đô thị - xây dựng'),
+    BuildingAction('Tòa nhà B'),
+    RoomAction('Tòa nhà B', 'Tài chính - Kế toán'),
     BuildingAction('Lối ra'),
   ],
   stepInfos: [
     StepInfo(
-      'Vào tòa nhà chính',
-      'Bạn đi vào tòa nhà chính xuất trình giấy tờ, để được hướng dẫn. '
+      'Vào tòa nhà A',
+      'Bạn đi vào tòa nhà A xuất trình giấy tờ, để được hướng dẫn. '
           'Bạn phải có giấy xét nghiệm âm tính có hiệu lực trong vòng 24h '
           'và đeo khẩu trang, kiểm tra nhiệt độ để đảm bảo an toàn.',
     ),
@@ -103,11 +106,19 @@ final changeVerifyActionDataUsecase = ActionData(
           'làm hồ sơ thủ tục.',
     ),
     StepInfo(
+      'Vào tòa nhà B',
+      'Đi sang tòa nhà B ở bên tay phải nhà A để tiếp tục làm thủ tục.',
+    ),
+    StepInfo(
       'Thực hiện phúc tra giấy phép cũ',
       'Bạn phải thực hiện phúc tra giấy phép cũ để xét xem có đủ điều '
           'kiện để đổi sang giấy phép xây dựng mới. '
           'Nếu đủ điều kiện bạn sẽ được cấp một tờ giấy chứng nhận đủ '
           'điều kiện tạm thời. ',
+    ),
+    StepInfo(
+      'Vào tòa nhà A',
+      'Quay trở lại tòa nhà A.',
     ),
     StepInfo(
       'Đổi sang giấy phép mới',
@@ -123,6 +134,10 @@ final changeVerifyActionDataUsecase = ActionData(
       'Bổ sung giấy phép môi trường',
       'Quay lại phòng "Quản lý đô thị - xây dựng" để nộp bổ sung giấy phép '
           'môi trường.',
+    ),
+    StepInfo(
+      'Vào tòa nhà B',
+      'Sang tòa nhà B hoàn thành lệ phí thủ tục.',
     ),
     StepInfo(
       'Vào phòng tài chính - kế toán',

@@ -124,9 +124,10 @@ class BlinkAssistantController extends ChangeNotifier {
       }
 
       var duration = Durations.kFast.duration;
-      if (_actionData.stepTravelled
-              .firstWhere((element) => element is RoomAction) ==
-          action) {
+      final actionIndex = _actionData.stepTravelled.indexWhere(
+        (e) => e == action,
+      );
+      if (_actionData.stepTravelled[actionIndex - 1] is BuildingAction) {
         duration = (Durations.kFast + 80).duration;
       }
 
@@ -181,16 +182,20 @@ class BlinkAssistantController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> back() async {
+  Future<bool> back() async {
     if (currentStep > 1) {
       final position = await calculateStep(currentStep - 1);
       if (position != null) {
         currentStep--;
         notifyListeners();
       }
+      return false;
     } else if (currentStep == 1) {
       currentStep = 0;
       notifyListeners();
+      return false;
+    } else {
+      return true;
     }
   }
 
