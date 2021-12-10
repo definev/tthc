@@ -92,7 +92,7 @@ class FormScreen extends ConsumerWidget {
           //     :
           controller.map(
         data: (data) {
-          final tthcForms = data.value;
+          final tthcForms = kIsWeb ? _webFakeData : data.value;
           return RefreshIndicator(
             onRefresh: () async {
               ref.refresh(formControllerProvider);
