@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,12 +26,19 @@ class MapScreen extends HookConsumerWidget {
       () {
         WidgetsBinding.instance!.addPostFrameCallback(
           (_) {
-            assistantController.addInitPosition(
-              Offset(
-                (mq.size.width - 80) / 2,
-                mq.size.height - mq.padding.bottom - mq.padding.top - 90,
-              ),
+            var offset = Offset(
+              (mq.size.width - 80) / 2,
+              mq.size.height - mq.viewInsets.top - mq.viewInsets.top - 90,
             );
+
+            if (kIsWeb) {
+              offset = Offset(
+                (mq.size.width - 80) / 2,
+                mq.size.height - mq.viewInsets.top - mq.viewInsets.top - 130,
+              );
+            }
+
+            assistantController.addInitPosition(offset);
           },
         );
       },

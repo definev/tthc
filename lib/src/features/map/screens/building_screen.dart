@@ -17,8 +17,8 @@ class BuildingScreen extends HookConsumerWidget {
 
   final BuildingData data;
 
-  double tileSize(BuildContext context) {
-    return (MediaQuery.of(context).size.width - 24) / 4;
+  double tileSize(double width) {
+    return (width - 24) / 4;
   }
 
   @override
@@ -34,43 +34,54 @@ class BuildingScreen extends HookConsumerWidget {
       [],
     );
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          children: [
-            SizedBox(
-              width: tileSize(context),
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (int floor = 0; floor < 3; floor++)
-                      Container(
-                        color: Theme.of(context).colorScheme.primary,
-                        height: tileSize(context),
-                        width: tileSize(context),
-                        child: Center(
-                          child: Text(
-                            'Tầng ${3 - floor}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .subtitle1!
-                                .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                  fontWeight: FontWeight.bold,
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600),
+          child: LayoutBuilder(builder: (context, constraints) {
+            return Padding(
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: tileSize(constraints.maxWidth),
+                    child: SafeArea(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (int floor = 0; floor < 3; floor++)
+                            Container(
+                              color: Theme.of(context).colorScheme.primary,
+                              height: tileSize(constraints.maxWidth),
+                              width: tileSize(constraints.maxWidth),
+                              child: Center(
+                                child: Text(
+                                  'Tầng ${3 - floor}',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onPrimary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
-                          ),
-                        ),
+                              ),
+                            ),
+                        ],
                       ),
-                  ],
-                ),
+                    ),
+                  ),
+                  Expanded(
+                    child: controller.markerWidget(
+                      context,
+                      tileSize(constraints.maxWidth),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Expanded(
-              child: controller.markerWidget(context, tileSize(context)),
-            ),
-          ],
+            );
+          }),
         ),
       ),
     );

@@ -67,11 +67,40 @@ class FormScreen extends ConsumerWidget {
         },
         label: const Text('Lên lịch'),
       ),
-      body: kIsWeb
-          ? ListView.builder(
-              itemCount: _webFakeData.length,
+      body:
+          //  kIsWeb
+          //     ? ListView.builder(
+          //         itemCount: _webFakeData.length,
+          //         itemBuilder: (context, index) {
+          //           final form = _webFakeData[index];
+          //           return ListTile(
+          //             title: Text(form.fullName),
+          //             subtitle: Text(form.tenThuTuc),
+          //             trailing: const Icon(Icons.chevron_right),
+          //             onTap: () {
+          //               if (form.tenThuTuc == 'Chứng minh thư') {
+          //                 actionDataController.state = identifyActionDataUsecase;
+          //               } else {
+          //                 actionDataController.state =
+          //                     changeVerifyActionDataUsecase;
+          //               }
+          //               Navigator.pushNamed(context, MapScreen.routeName);
+          //             },
+          //           );
+          //         },
+          //       )
+          //     :
+          controller.map(
+        data: (data) {
+          final tthcForms = data.value;
+          return RefreshIndicator(
+            onRefresh: () async {
+              ref.refresh(formControllerProvider);
+            },
+            child: ListView.builder(
+              itemCount: tthcForms.length,
               itemBuilder: (context, index) {
-                final form = _webFakeData[index];
+                final form = tthcForms[index];
                 return ListTile(
                   title: Text(form.fullName),
                   subtitle: Text(form.tenThuTuc),
@@ -87,40 +116,12 @@ class FormScreen extends ConsumerWidget {
                   },
                 );
               },
-            )
-          : controller.map(
-              data: (data) {
-                final tthcForms = data.value;
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    ref.refresh(formControllerProvider);
-                  },
-                  child: ListView.builder(
-                    itemCount: tthcForms.length,
-                    itemBuilder: (context, index) {
-                      final form = tthcForms[index];
-                      return ListTile(
-                        title: Text(form.fullName),
-                        subtitle: Text(form.tenThuTuc),
-                        trailing: const Icon(Icons.chevron_right),
-                        onTap: () {
-                          if (form.tenThuTuc == 'Chứng minh thư') {
-                            actionDataController.state =
-                                identifyActionDataUsecase;
-                          } else {
-                            actionDataController.state =
-                                changeVerifyActionDataUsecase;
-                          }
-                          Navigator.pushNamed(context, MapScreen.routeName);
-                        },
-                      );
-                    },
-                  ),
-                );
-              },
-              loading: (_) => const Center(child: CircularProgressIndicator()),
-              error: (_) => const Center(child: CircularProgressIndicator()),
             ),
+          );
+        },
+        loading: (_) => const Center(child: CircularProgressIndicator()),
+        error: (_) => const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }
